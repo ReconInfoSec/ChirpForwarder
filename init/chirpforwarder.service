@@ -1,0 +1,13 @@
+# place under /etc/systemd/system/chirpforwarder.service
+[Unit]
+Description=chirpforwarder
+After=network-online.target
+
+[Service]
+Type=simple
+User=chirpuser
+Group=chirpgroup
+ExecStart=/location/of/ChirpForwarder -apikey APIKEY -domain DOMAIN .....
+
+[Install]
+WantedBy=multi-user.target
