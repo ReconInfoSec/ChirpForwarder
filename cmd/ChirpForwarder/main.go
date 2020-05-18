@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"flag"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -85,6 +86,7 @@ func init() {
 }
 
 func main() {
+	fmt.Println(logo)
 	log.Info("starting canary ChirpForwarder")
 
 	var err error
@@ -286,8 +288,9 @@ func main() {
 			kf, _ = canarytools.NewKafkaForwarder(brokers, omKafkaTopic, nil, l)
 		}
 		forwarder = kf
+	case "":
+		l.Fatal("you have to provide an output module! ('-output' flag, or CANARY_OUTPUT env variable)")
 	default:
-		l.WithField("outputModule", forwarderModule).Fatal("unsupported output module")
 	}
 
 	// mapper
