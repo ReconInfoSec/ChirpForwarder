@@ -25,8 +25,10 @@ This tool aims to lower the barrier for canary owners who have a need to integra
 - docker support with a sample "docker-compose" file; set environment variables, `docker-compose up` and off you go.
 
 ## How? **WIP FROM HERE**
-First of all, in your canary console, go to `Settings`, then  turn `ON` the `API` switch; get your API key, and your unique domain (before .canary.tools), you might also want to `Download Token File` which makes it a bit easier later on.
+To get started, you need two things: an **API token**, and your **Canary Console Domain** `https://**HEX-HEX-HEX**.canary.tools`.  
+To get the API token, in your canary console, go to `Settings`, then  turn `ON` the `API` switch; copy your API key ... you might also want to `Download Token File` which has those two pieces of info in it.
 ![Get canary API](/assets/images/01-GetAPI.png)
+
 ## Show me more examples!
 ## Tell me more...
 This graph explains the overview (don't worry, using the tool is pretty easy)
