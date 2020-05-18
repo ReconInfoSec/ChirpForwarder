@@ -22,6 +22,7 @@ This tool aims to lower the barrier for canary owners who have a need to integra
     - "`-output kafka`" is same as "`CANARY_OUTPUT=kafka`"
     - "`-esuser elastic`" is same as "`CANARY_ESUSER=elastic`"
   - API key, and the canary domain can also be "additonally" specified using the token file downloaded from the console, either through `-tokenfile`, or simply placing it in the user's home directory, and ChirpForwarder will look for that file there on its own.
+- docker support with a sample "docker-compose" file; set environment variables, `docker-compose up` and off you go.
 
 ## How? **WIP FROM HERE**
 First of all, in your canary console, go to `Settings`, then  turn `ON` the `API` switch; get your API key, and your unique domain (before .canary.tools), you might also want to `Download Token File` which makes it a bit easier later on.
