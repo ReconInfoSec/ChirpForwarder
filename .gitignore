@@ -1,3 +1,4 @@
 .canary.lastcheck
 canarytools.config
 release/
+.vscode/launch.json

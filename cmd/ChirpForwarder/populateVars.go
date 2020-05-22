@@ -5,188 +5,190 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/SherifEldeeb/canarytools"
+
 	log "github.com/sirupsen/logrus"
 )
 
-func popultaeVarsFromEnv() {
+func popultaeVarsFromEnv(cfg *canarytools.ChirpForwarderConfig) {
 	// Artificial Intelligence vars parser!
 	// lots of if statements ahead ... :)
 
 	// General flags
-	if feederModule == "" {
-		feederModule, _ = os.LookupEnv("CANARY_FEEDER")
+	if cfg.FeederModule == "" {
+		cfg.FeederModule, _ = os.LookupEnv("CANARY_FEEDER")
 	}
-	if forwarderModule == "" {
-		forwarderModule, _ = os.LookupEnv("CANARY_OUTPUT")
+	if cfg.ForwarderModule == "" {
+		cfg.ForwarderModule, _ = os.LookupEnv("CANARY_OUTPUT")
 	}
-	if loglevel == "" {
-		loglevel, _ = os.LookupEnv("CANARY_LOGLEVEL")
+	if cfg.Loglevel == "" {
+		cfg.Loglevel, _ = os.LookupEnv("CANARY_LOGLEVEL")
 	}
-	if thenWhat == "" {
-		thenWhat, _ = os.LookupEnv("CANARY_THEN")
+	if cfg.ThenWhat == "" {
+		cfg.ThenWhat, _ = os.LookupEnv("CANARY_THEN")
 	}
-	if sinceWhenString == "" {
-		sinceWhenString, _ = os.LookupEnv("CANARY_SINCE")
+	if cfg.SinceWhenString == "" {
+		cfg.SinceWhenString, _ = os.LookupEnv("CANARY_SINCE")
 	}
-	if whichIncidents == "" {
-		whichIncidents, _ = os.LookupEnv("CANARY_WHICH")
+	if cfg.WhichIncidents == "" {
+		cfg.WhichIncidents, _ = os.LookupEnv("CANARY_WHICH")
 	}
-	if incidentFilter == "" {
-		incidentFilter, _ = os.LookupEnv("CANARY_FILTER")
+	if cfg.IncidentFilter == "" {
+		cfg.IncidentFilter, _ = os.LookupEnv("CANARY_FILTER")
 	}
 
 	// SSL/TLS Client configs
-	// used by TCP & Elastic output
-	if sslUseSSL == false {
+	// used by TCP &cfg. Elastic output
+	if cfg.SSLUseSSL == false {
 		sslUseSSLBool, _ := os.LookupEnv("CANARY_SSL")
-		sslUseSSL, _ = strconv.ParseBool(sslUseSSLBool)
+		cfg.SSLUseSSL, _ = strconv.ParseBool(sslUseSSLBool)
 	}
-	if sslSkipInsecure == false {
+	if cfg.SSLSkipInsecure == false {
 		sslSkipInsecureBool, _ := os.LookupEnv("CANARY_INSECURE")
-		sslSkipInsecure, _ = strconv.ParseBool(sslSkipInsecureBool)
+		cfg.SSLSkipInsecure, _ = strconv.ParseBool(sslSkipInsecureBool)
 	}
-	if sslCA == "" {
-		sslCA, _ = os.LookupEnv("CANARY_SSLCLIENTCA")
+	if cfg.SSLCA == "" {
+		cfg.SSLCA, _ = os.LookupEnv("CANARY_SSLCLIENTCA")
 	}
-	if sslKey == "" {
-		sslKey, _ = os.LookupEnv("CANARY_SSLCLIENTKEY")
+	if cfg.SSLKey == "" {
+		cfg.SSLKey, _ = os.LookupEnv("CANARY_SSLCLIENTKEY")
 	}
-	if sslCert == "" {
-		sslCert, _ = os.LookupEnv("CANARY_SSLCLIENTCERT")
+	if cfg.SSLCert == "" {
+		cfg.SSLCert, _ = os.LookupEnv("CANARY_SSLCLIENTCERT")
 	}
 
 	// INPUT MODULES
 	// Console API input module
-	if imConsoleAPIKey == "" {
-		imConsoleAPIKey, _ = os.LookupEnv("CANARY_APIKEY")
+	if cfg.ImConsoleAPIKey == "" {
+		cfg.ImConsoleAPIKey, _ = os.LookupEnv("CANARY_APIKEY")
 	}
-	if imConsoleAPIDomain == "" {
-		imConsoleAPIDomain, _ = os.LookupEnv("CANARY_DOMAIN")
+	if cfg.ImConsoleAPIDomain == "" {
+		cfg.ImConsoleAPIDomain, _ = os.LookupEnv("CANARY_DOMAIN")
 	}
-	if imConsoleTokenFile == "" {
-		imConsoleTokenFile, _ = os.LookupEnv("CANARY_TOKENFILE")
+	if cfg.ImConsoleTokenFile == "" {
+		cfg.ImConsoleTokenFile, _ = os.LookupEnv("CANARY_TOKENFILE")
 	}
-	if imConsoleAPIFetchInterval == 0 {
+	if cfg.ImConsoleAPIFetchInterval == 0 {
 		imConsoleAPIFetchIntervalInt, _ := os.LookupEnv("CANARY_INTERVAL")
-		imConsoleAPIFetchInterval, _ = strconv.Atoi(imConsoleAPIFetchIntervalInt)
+		cfg.ImConsoleAPIFetchInterval, _ = strconv.Atoi(imConsoleAPIFetchIntervalInt)
 	}
 
 	// OUTPUT MODULES
 	// TCP/UDP output module
-	if omTCPUDPPort == 0 {
+	if cfg.OmTCPUDPPort == 0 {
 		omTCPUDPPortInt, _ := os.LookupEnv("CANARY_PORT")
-		omTCPUDPPort, _ = strconv.Atoi(omTCPUDPPortInt)
+		cfg.OmTCPUDPPort, _ = strconv.Atoi(omTCPUDPPortInt)
 	}
-	if omTCPUDPHost == "" {
-		omTCPUDPHost, _ = os.LookupEnv("CANARY_HOST")
+	if cfg.OmTCPUDPHost == "" {
+		cfg.OmTCPUDPHost, _ = os.LookupEnv("CANARY_HOST")
 	}
 
 	// File forward module
-	if omFileMaxSize == 0 {
+	if cfg.OmFileMaxSize == 0 {
 		omFileMaxSizeInt, _ := os.LookupEnv("CANARY_MAXSIZE")
-		omFileMaxSize, _ = strconv.Atoi(omFileMaxSizeInt)
+		cfg.OmFileMaxSize, _ = strconv.Atoi(omFileMaxSizeInt)
 	}
-	if omFileMaxBackups == 0 {
+	if cfg.OmFileMaxBackups == 0 {
 		omFileMaxBackupsInt, _ := os.LookupEnv("CANARY_MAXBACKUPS")
-		omFileMaxBackups, _ = strconv.Atoi(omFileMaxBackupsInt)
+		cfg.OmFileMaxBackups, _ = strconv.Atoi(omFileMaxBackupsInt)
 	}
-	if omFileMaxAge == 0 {
+	if cfg.OmFileMaxAge == 0 {
 		omFileMaxAgeInt, _ := os.LookupEnv("CANARY_MAXAGE")
-		omFileMaxAge, _ = strconv.Atoi(omFileMaxAgeInt)
+		cfg.OmFileMaxAge, _ = strconv.Atoi(omFileMaxAgeInt)
 	}
-	if omFileCompress == false {
+	if cfg.OmFileCompress == false {
 		omFileCompressBool, _ := os.LookupEnv("CANARY_COMPRESS")
-		omFileCompress, _ = strconv.ParseBool(omFileCompressBool)
+		cfg.OmFileCompress, _ = strconv.ParseBool(omFileCompressBool)
 	}
-	if omFileName == "" {
-		omFileName, _ = os.LookupEnv("CANARY_FILENAME")
+	if cfg.OmFileName == "" {
+		cfg.OmFileName, _ = os.LookupEnv("CANARY_FILENAME")
 	}
 
 	// elasticsearch forward module
-	if omElasticHost == "" {
-		omElasticHost, _ = os.LookupEnv("CANARY_ESHOST")
+	if cfg.OmElasticHost == "" {
+		cfg.OmElasticHost, _ = os.LookupEnv("CANARY_ESHOST")
 	}
-	if omElasticUser == "" {
-		omElasticUser, _ = os.LookupEnv("CANARY_ESUSER")
+	if cfg.OmElasticUser == "" {
+		cfg.OmElasticUser, _ = os.LookupEnv("CANARY_ESUSER")
 	}
-	if omElasticPass == "" {
-		omElasticPass, _ = os.LookupEnv("CANARY_ESPASS")
+	if cfg.OmElasticPass == "" {
+		cfg.OmElasticPass, _ = os.LookupEnv("CANARY_ESPASS")
 	}
-	if omElasticCloudAPIKey == "" {
-		omElasticCloudAPIKey, _ = os.LookupEnv("CANARY_ESCLOUDAPIKEY")
+	if cfg.OmElasticCloudAPIKey == "" {
+		cfg.OmElasticCloudAPIKey, _ = os.LookupEnv("CANARY_ESCLOUDAPIKEY")
 	}
-	if omElasticCloudID == "" {
-		omElasticCloudID, _ = os.LookupEnv("CANARY_ESCLOUDID")
+	if cfg.OmElasticCloudID == "" {
+		cfg.OmElasticCloudID, _ = os.LookupEnv("CANARY_ESCLOUDID")
 	}
-	if omElasticIndex == "" {
-		omElasticIndex, _ = os.LookupEnv("CANARY_ESINDEX")
+	if cfg.OmElasticIndex == "" {
+		cfg.OmElasticIndex, _ = os.LookupEnv("CANARY_ESINDEX")
 	}
 
 	// kafka forward module
-	if omKafkaBrokers == "" {
-		omKafkaBrokers, _ = os.LookupEnv("CANARY_KAFKABROKERS")
+	if cfg.OmKafkaBrokers == "" {
+		cfg.OmKafkaBrokers, _ = os.LookupEnv("CANARY_KAFKABROKERS")
 	}
-	if omKafkaTopic == "" {
-		omKafkaTopic, _ = os.LookupEnv("CANARY_KAFKATOPIC")
+	if cfg.OmKafkaTopic == "" {
+		cfg.OmKafkaTopic, _ = os.LookupEnv("CANARY_KAFKATOPIC")
 	}
 }
 
-func populateVarsFromFlags() {
+func populateVarsFromFlags(cfg *canarytools.ChirpForwarderConfig) {
 	// General flags
-	flag.StringVar(&feederModule, "feeder", "consoleapi", "input module")
-	flag.StringVar(&forwarderModule, "output", "", "output module ('tcp', 'file', 'elastic' or 'kafka')")
-	flag.StringVar(&loglevel, "loglevel", "", "set loglevel, can be one of ('info', 'warning' or 'debug')")
-	flag.StringVar(&thenWhat, "then", "", "what to do after getting an incident? can be one of ('nothing', or 'ack')")
-	flag.StringVar(&sinceWhenString, "since", "", `get events newer than this time.
+	flag.StringVar(&cfg.FeederModule, "feeder", "consoleapi", "input module")
+	flag.StringVar(&cfg.ForwarderModule, "output", "", "output module ('tcp', 'file', 'elastic' or 'kafka')")
+	flag.StringVar(&cfg.Loglevel, "loglevel", "", "set loglevel, can be one of ('info', 'warning' or 'debug')")
+	flag.StringVar(&cfg.ThenWhat, "then", "", "what to do after getting an incident? can be one of ('nothing', or 'ack')")
+	flag.StringVar(&cfg.SinceWhenString, "since", "", `get events newer than this time.
 		format has to be like this: 'yyyy-MM-dd HH:mm:ss'
 		if nothing provided, it will check value from '.canary.lastcheck' file,
 		if .canary.lastcheck file does not exist, it will default to events from last 7 days`)
-	flag.StringVar(&whichIncidents, "which", "", "which incidents to fetch? can be one of ('all', or 'unacknowledged')")
-	flag.StringVar(&incidentFilter, "filter", "", "filter to apply to incident ('none', or 'dropevents')")
+	flag.StringVar(&cfg.WhichIncidents, "which", "", "which incidents to fetch? can be one of ('all', or 'unacknowledged')")
+	flag.StringVar(&cfg.IncidentFilter, "filter", "", "filter to apply to incident ('none', or 'dropevents')")
 
 	// SSL/TLS Client configs
-	// used by TCP & Elastic output
-	flag.BoolVar(&sslUseSSL, "ssl", false, "[SSL/TLS CLIENT] are we using SSL/TLS? setting this to true enables encrypted clinet configs")
-	flag.BoolVar(&sslSkipInsecure, "insecure", false, "[SSL/TLS CLIENT] ignore cert errors")
-	flag.StringVar(&sslCA, "sslclientca", "", "[SSL/TLS CLIENT] path to client rusted CA certificate file")
-	flag.StringVar(&sslKey, "sslclientkey", "", "[SSL/TLS CLIENT] path to client SSL/TLS Key  file")
-	flag.StringVar(&sslCert, "sslclientcert", "", "[SSL/TLS CLIENT] path to client SSL/TLS cert  file")
+	// used by TCP &cfg. Elastic output
+	flag.BoolVar(&cfg.SSLUseSSL, "ssl", false, "[SSL/TLS CLIENT] are we using SSL/TLS? setting this to true enables encrypted clinet configs")
+	flag.BoolVar(&cfg.SSLSkipInsecure, "insecure", false, "[SSL/TLS CLIENT] ignore cert errors")
+	flag.StringVar(&cfg.SSLCA, "sslclientca", "", "[SSL/TLS CLIENT] path to client rusted CA certificate file")
+	flag.StringVar(&cfg.SSLKey, "sslclientkey", "", "[SSL/TLS CLIENT] path to client SSL/TLS Key  file")
+	flag.StringVar(&cfg.SSLCert, "sslclientcert", "", "[SSL/TLS CLIENT] path to client SSL/TLS cert  file")
 
 	// INPUT MODULES
 	// Console API input module
-	flag.StringVar(&imConsoleAPIKey, "apikey", "", "API Key")
-	flag.StringVar(&imConsoleAPIDomain, "domain", "", "canarytools domain")
-	flag.StringVar(&imConsoleTokenFile, "tokenfile", "", "the token file 'canarytools.config' which contains api token and the domain")
-	flag.IntVar(&imConsoleAPIFetchInterval, "interval", 0, "alert fetch interval 'in seconds'")
+	flag.StringVar(&cfg.ImConsoleAPIKey, "apikey", "", "API Key")
+	flag.StringVar(&cfg.ImConsoleAPIDomain, "domain", "", "canarytools domain")
+	flag.StringVar(&cfg.ImConsoleTokenFile, "tokenfile", "", "the token file 'canarytools.config' which contains api token and the domain")
+	flag.IntVar(&cfg.ImConsoleAPIFetchInterval, "interval", 0, "alert fetch interval 'in seconds'")
 
 	// OUTPUT MODULES
 	// TCP/UDP output module
-	flag.IntVar(&omTCPUDPPort, "port", 0, "[OUT|TCP] TCP/UDP port")
-	flag.StringVar(&omTCPUDPHost, "host", "", "[OUT|TCP] host")
+	flag.IntVar(&cfg.OmTCPUDPPort, "port", 0, "[OUT|TCP] TCP/UDP port")
+	flag.StringVar(&cfg.OmTCPUDPHost, "host", "", "[OUT|TCP] host")
 
 	// File forward module
-	flag.IntVar(&omFileMaxSize, "maxsize", 0, "[OUT|FILE] file max size in megabytes")
-	flag.IntVar(&omFileMaxBackups, "maxbackups", 0, "[OUT|FILE] file max number of files to keep")
-	flag.IntVar(&omFileMaxAge, "maxage", 0, "[OUT|FILE] file max age in days 'older than this will be deleted'")
-	flag.BoolVar(&omFileCompress, "compress", false, "[OUT|FILE] file compress log files?")
-	flag.StringVar(&omFileName, "filename", "", "[OUT|FILE] file name")
+	flag.IntVar(&cfg.OmFileMaxSize, "maxsize", 0, "[OUT|FILE] file max size in megabytes")
+	flag.IntVar(&cfg.OmFileMaxBackups, "maxbackups", 0, "[OUT|FILE] file max number of files to keep")
+	flag.IntVar(&cfg.OmFileMaxAge, "maxage", 0, "[OUT|FILE] file max age in days 'older than this will be deleted'")
+	flag.BoolVar(&cfg.OmFileCompress, "compress", false, "[OUT|FILE] file compress log files?")
+	flag.StringVar(&cfg.OmFileName, "filename", "", "[OUT|FILE] file name")
 
 	// elasticsearch forward module
-	flag.StringVar(&omElasticHost, "eshost", "", "[OUT|ELASTIC] elasticsearch host")
-	flag.StringVar(&omElasticUser, "esuser", "", "[OUT|ELASTIC] elasticsearch user 'basic auth'")
-	flag.StringVar(&omElasticPass, "espass", "", "[OUT|ELASTIC] elasticsearch password 'basic auth'")
-	flag.StringVar(&omElasticCloudAPIKey, "escloudapikey", "", "[OUT|ELASTIC] elasticsearch Base64-encoded token for authorization; if set, overrides username and password")
-	flag.StringVar(&omElasticCloudID, "escloudid", "", "[OUT|ELASTIC] endpoint for the Elastic Cloud Service 'https://elastic.co/cloud'")
-	flag.StringVar(&omElasticIndex, "esindex", "canarychirps", "[OUT|ELASTIC] elasticsearch index")
+	flag.StringVar(&cfg.OmElasticHost, "eshost", "", "[OUT|ELASTIC] elasticsearch host")
+	flag.StringVar(&cfg.OmElasticUser, "esuser", "", "[OUT|ELASTIC] elasticsearch user 'basic auth'")
+	flag.StringVar(&cfg.OmElasticPass, "espass", "", "[OUT|ELASTIC] elasticsearch password 'basic auth'")
+	flag.StringVar(&cfg.OmElasticCloudAPIKey, "escloudapikey", "", "[OUT|ELASTIC] elasticsearch Base64-encoded token for authorization; if set, overrides username and password")
+	flag.StringVar(&cfg.OmElasticCloudID, "escloudid", "", "[OUT|ELASTIC] endpoint for the Elastic Cloud Service 'https://elastic.co/cloud'")
+	flag.StringVar(&cfg.OmElasticIndex, "esindex", "canarychirps", "[OUT|ELASTIC] elasticsearch index")
 
 	// kafka forward module
-	flag.StringVar(&omKafkaBrokers, "kafkabrokers", "", `[OUT|KAFKA] kafka brokers "broker:port"
+	flag.StringVar(&cfg.OmKafkaBrokers, "kafkabrokers", "", `[OUT|KAFKA] kafka brokers "broker:port"
 		for multiple brokers, separate using semicolon "broker1:9092;broker2:9092"`)
-	flag.StringVar(&omKafkaTopic, "kafkatopic", "", "[OUT|KAFKA] elasticsearch user 'basic auth'")
+	flag.StringVar(&cfg.OmKafkaTopic, "kafkatopic", "", "[OUT|KAFKA] elasticsearch user 'basic auth'")
 }
 
-func setDefaultVars(l *log.Logger) {
-	switch loglevel {
+func setDefaultVars(cfg *canarytools.ChirpForwarderConfig, l *log.Logger) {
+	switch cfg.Loglevel {
 	case "info":
 		l.SetLevel(log.InfoLevel)
 	case "warning":
@@ -201,50 +203,50 @@ func setDefaultVars(l *log.Logger) {
 	}
 	// setting default values for those that doesn't exist
 	// had to do it here instead of flag package to support envrionment vars
-	switch thenWhat {
+	switch cfg.ThenWhat {
 	case "nothing":
 	case "ack":
 	default:
 		l.Warn("'then' is not valid, or not specified; will set to 'nothing'")
-		thenWhat = "nothing"
+		cfg.ThenWhat = "nothing"
 	}
 
-	switch whichIncidents {
+	switch cfg.WhichIncidents {
 	case "all":
 	case "unacknowledged":
 	default:
 		l.Warn("'which' is not valid, or not specified; will set to 'unacknowledged'")
-		whichIncidents = "unacknowledged"
+		cfg.WhichIncidents = "unacknowledged"
 	}
 
-	switch incidentFilter {
+	switch cfg.IncidentFilter {
 	case "none":
 	case "dropevents":
 	default:
 		l.Warn("'filter' is not valid, or not specified; will set to 'none'")
-		incidentFilter = "none"
+		cfg.IncidentFilter = "none"
 	}
 
-	if imConsoleAPIFetchInterval == 0 {
+	if cfg.ImConsoleAPIFetchInterval == 0 {
 		l.Warn("'interval' is not valid, or not specified; will set to '60 seconds'")
-		imConsoleAPIFetchInterval = 60
+		cfg.ImConsoleAPIFetchInterval = 60
 	}
 
 	// File forward module
-	if omFileMaxSize == 0 {
+	if cfg.OmFileMaxSize == 0 {
 		l.Warn("'maxsize' is not valid, or not specified; will set to '8 Megabytes'")
-		omFileMaxSize = 8
+		cfg.OmFileMaxSize = 8
 	}
-	if omFileMaxBackups == 0 {
+	if cfg.OmFileMaxBackups == 0 {
 		l.Warn("'maxbackups' is not valid, or not specified; will set to '14 files'")
-		omFileMaxBackups = 14
+		cfg.OmFileMaxBackups = 14
 	}
-	if omFileMaxAge == 0 {
+	if cfg.OmFileMaxAge == 0 {
 		l.Warn("'maxage' is not valid, or not specified; will set to '120 days'")
-		omFileMaxAge = 120
+		cfg.OmFileMaxAge = 120
 	}
-	if omFileName == "" {
+	if cfg.OmFileName == "" {
 		l.Warn("'filename' is not valid, or not specified; will set to 'canaryChirps.json'")
-		omFileName = "canaryChirps.json"
+		cfg.OmFileName = "canaryChirps.json"
 	}
 }
