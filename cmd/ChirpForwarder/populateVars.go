@@ -163,7 +163,7 @@ func populateVarsFromFlags(cfg *canarytools.ChirpForwarderConfig) {
 
 	// OUTPUT MODULES
 	// TCP/UDP output module
-	flag.IntVar(&cfg.OmTCPUDPPort, "port", 0, "[OUT|TCP] TCP/UDP port")
+	flag.IntVar(&cfg.OmTCPUDPPort, "port", 0, "[OUT|TCP] TCP port")
 	flag.StringVar(&cfg.OmTCPUDPHost, "host", "", "[OUT|TCP] host")
 
 	// File forward module
@@ -184,7 +184,7 @@ func populateVarsFromFlags(cfg *canarytools.ChirpForwarderConfig) {
 	// kafka forward module
 	flag.StringVar(&cfg.OmKafkaBrokers, "kafkabrokers", "", `[OUT|KAFKA] kafka brokers "broker:port"
 		for multiple brokers, separate using semicolon "broker1:9092;broker2:9092"`)
-	flag.StringVar(&cfg.OmKafkaTopic, "kafkatopic", "", "[OUT|KAFKA] elasticsearch user 'basic auth'")
+	flag.StringVar(&cfg.OmKafkaTopic, "kafkatopic", "", "[OUT|KAFKA] kafka topic 'defaults to canarychirps if not set'")
 }
 
 func setDefaultVars(cfg *canarytools.ChirpForwarderConfig, l *log.Logger) {
