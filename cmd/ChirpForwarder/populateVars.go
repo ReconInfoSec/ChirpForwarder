@@ -188,6 +188,10 @@ func populateVarsFromFlags(cfg *canarytools.ChirpForwarderConfig) {
 }
 
 func setDefaultVars(cfg *canarytools.ChirpForwarderConfig, l *log.Logger) {
+	if l == nil {
+		panic("no logger specififed; will create a new one with default settings")
+		// l = log.New()
+	}
 	switch cfg.Loglevel {
 	case "info":
 		l.SetLevel(log.InfoLevel)

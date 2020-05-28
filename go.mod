@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
-	github.com/SherifEldeeb/canarytools latest
+	github.com/SherifEldeeb/canarytools v0.0.0-20200522145418-a784b0a05bd7
 	github.com/Shopify/sarama v1.26.4 // indirect
 	github.com/elastic/go-elasticsearch/v7 v7.7.0
 	github.com/klauspost/compress v1.10.6 // indirect
