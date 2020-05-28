@@ -23,20 +23,5 @@ This tool aims to lower the barrier for canary owners who have a need to integra
     - "`-esuser elastic`" is same as "`CANARY_ESUSER=elastic`"
   - API key, and the canary domain can also be "additonally" specified using the token file downloaded from the console, either through `-tokenfile`, or simply placing it in the user's home directory, and ChirpForwarder will look for that file there on its own.
 - docker support with a sample "docker-compose" file; set environment variables, `docker-compose up` and off you go.
-
-## How? **WIP FROM HERE**
-To get started, you need two things: an **API token**, and your **Canary Console Domain** `https://**HEX-HEX-HEX**.canary.tools`.  
-To get the API token, in your canary console, go to `Settings`, then  turn `ON` the `API` switch; copy your API key ... you might also want to `Download Token File` which has those two pieces of info in it.
-![Get canary API](/assets/images/01-GetAPI.png)
-
-## Show me more examples!
-## Tell me more...
-This graph explains the overview (don't worry, using the tool is pretty easy)
-![ChirpForwarder Overview](/assets/images/Overview.png)
-The ChirpForwarder has the following components:
-  * Input Modules
-  * Filter Modules (not shown in graph)
-  * Mapper Modules
-  * Output Modules 
-### Input Modules
-
+***
+Head over to the [WiKi](https://github.com/SherifEldeeb/ChirpForwarder/wiki) to learn more.
