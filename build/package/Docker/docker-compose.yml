@@ -1,11 +1,16 @@
+# you can run it without hardcoding sensitive info in the file
+# passing arguments as env variables
+# if you're doing sudo, make sure you pass -E as well to keep env variables
+# e.g.:
+# CANARY_DOMAIN=f...a CANARY_APIKEY=4c8...b10 sudo -E docker-compose up
 version: '3'
 services:
   chirpforwarder:
     image: "0xdeeb/chirpforwarder"
     environment: 
-        CANARY_APIKEY: 13c9d4d0a7ca33f11d744c1a67e10d1f
-        CANARY_DOMAIN: f1a7c45a
-        CANARY_INTERVAL: 5
+        CANARY_APIKEY: ${CANARY_APIKEY}
+        CANARY_DOMAIN: ${CANARY_DOMAIN}
+        CANARY_INTERVAL: 60
         CANARY_OUTPUT: file
         CANARY_FILENAME: /chirps/chirps.json
     volumes:

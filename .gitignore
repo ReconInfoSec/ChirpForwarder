@@ -2,3 +2,5 @@
 canarytools.config
 release/
 .vscode/launch.json
+build/package/Docker/commands.sh
+build/package/Docker/chirps
