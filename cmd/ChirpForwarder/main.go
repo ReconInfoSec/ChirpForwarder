@@ -36,7 +36,12 @@ func main() {
 	setDefaultVars(&cfg, l)
 
 	// create a new chirpforwarder
-	cf, _ := canarytools.NewChirpForwarder(cfg, l)
+	cf, err := canarytools.NewChirpForwarder(cfg, l)
+	if err != nil {
+		l.WithFields(log.Fields{
+			"err": err,
+		}).Fatal("error setting up ChirpForwarder")
+	}
 
 	// All good, let's roll...
 	cf.Run()
