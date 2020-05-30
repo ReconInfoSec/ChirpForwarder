@@ -9,6 +9,9 @@ RUN go build -v -o /ChirpForwarder
 # The actual image
 FROM alpine
 COPY --from=build /ChirpForwarder /
+# Placeholder for file out
 RUN mkdir /chirps
+# To hold the lastcheck file
+RUN mkdir /.canary
 CMD ["/ChirpForwarder"]
 
