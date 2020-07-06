@@ -1,9 +1,7 @@
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/SherifEldeeb/canarytools v0.0.0-20200530132122-d238b11d6c40 h1:44elPl6Ngv6dZt64gSAf7kL00/rtRVzJD5O+B8Rh+mo=
-github.com/SherifEldeeb/canarytools v0.0.0-20200530132122-d238b11d6c40/go.mod h1:bAy1LTgelJUeptZD17OkU62wzgfAsTz96KBSsKJrdHA=
-github.com/SherifEldeeb/canarytools v0.0.0-20200530135345-4ce4ac359c1a h1:TuqOoRPsn85+7LxGOQ6q7d2LsJc/6fjV5tblqOVklnw=
-github.com/SherifEldeeb/canarytools v0.0.0-20200530135345-4ce4ac359c1a/go.mod h1:bAy1LTgelJUeptZD17OkU62wzgfAsTz96KBSsKJrdHA=
+github.com/SherifEldeeb/canarytools v0.0.0-20200706070735-1f9f3ebfdf87 h1:fw9mCuF4+CWUryDG7i9i9c6k5gErbT4U0T9fNm2MlgU=
+github.com/SherifEldeeb/canarytools v0.0.0-20200706070735-1f9f3ebfdf87/go.mod h1:bAy1LTgelJUeptZD17OkU62wzgfAsTz96KBSsKJrdHA=
 github.com/Shopify/sarama v1.26.3 h1:wSN3FpDXLe3e2z47OzGii5VAK693oVkyHFwh240jWjg=
 github.com/Shopify/sarama v1.26.3/go.mod h1:NbSGBSSndYaIhRcBtY9V0U7AyH+x71bG668AuWys/yU=
 github.com/Shopify/sarama v1.26.4 h1:+17TxUq/PJEAfZAll0T7XJjSgQWCpaQSoki/x5yN8o8=
